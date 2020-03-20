@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        fieldset{
+            width:800px;
+            height:150px;
+            margin-left: 60px;
+        }
+        legend{
+            color:red;
+            font-weight: 800;
+            font-size: larger;
+        }
+        .div1{
+            float:left;
+            width:800px;
+            height:50px;
+            border:1px solid grey;
+        }
+        #div2{
+            float:left;
+            width:700px;
+            margin-left:30px;
+            margin-top:10px;
+        }
+        ul{
+            margin-left: -30px;
+            width: 500px;
+        }
+        li{
+            list-style: none;
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin-left:10px;
+            margin-top: -5px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>网页换肤</legend>
+        <div class="div1">
+            <ul>
+                <li title="灰色"></li>
+                <li title="紫色"></li>
+                <li title="粉色"></li>
+                <li title="蓝色"></li>
+                <li title="黄色"></li>
+                <li title="绿色"></li>
+              </ul>
+        </div>
+        <div id="div2">
+        LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了，该数据仍然存在，下次打开浏览器访问网站时仍然可以继续使用。
+        </div>
+    </fieldset>
+</body>
+<script>
+    var colors=['grey','purple','pink','blue','yellow','green'];
+    var lis=document.querySelectorAll('li');
+    var div2=document.getElementById('div2');
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.background=colors[i];
+        lis[i].onclick=function(){
+            for(var j=0;j<lis.length;j++){
+                lis[j].style.marginTop='-5px';
+            }
+            lis[i].index=i;
+            lis[i].style.marginTop='-10px';
+            div2.style.background=colors[this.index];
+            localStorage.setItem('bgc',colors[this.index]);
+        }
+        window.onload=function(){
+            div2.style.background=localStorage.getItem('bgc');
+        }
+    }
+</script>
+</html>
